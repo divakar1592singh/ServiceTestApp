@@ -59,9 +59,9 @@ public class MyService extends Service {
                     mRandomNumber = new Random().nextInt(MAX) + MIN;
                     Log.i(getResources().getString(R.string.app_name), " In MyService, Thread is : " + Thread.currentThread().getId()+
                     ", Random Number is : "+mRandomNumber);
-                    if(mRandomNumber == 55){
-                        stopSelf();
-                    }
+//                    if(mRandomNumber == 55){
+//                        stopSelf();
+//                    }
                 }
             } catch (InterruptedException ie) {
                 Log.e(getResources().getString(R.string.app_name), "#####Error : " + ie, ie);
@@ -73,6 +73,9 @@ public class MyService extends Service {
         mIsRandomGeneratorOn = false;
     }
 
+    public int getRandomNo(){
+        return  mRandomNumber;
+    }
 
 
     @Nullable
@@ -81,18 +84,18 @@ public class MyService extends Service {
         Log.i(getResources().getString(R.string.app_name), "In onBind");
         return mBinder;
     }
-//
-//    @Override
-//    public void onRebind(Intent intent) {
-//        super.onRebind(intent);
-//        Log.i(getResources().getString(R.string.app_name), "In onReBind");
-//    }
-//
-//    @Override
-//    public boolean onUnbind(Intent intent) {
-//        Log.i(getResources().getString(R.string.app_name), "In unBind");
-//        return super.onUnbind(intent);
-//    }
+
+    @Override
+    public void onRebind(Intent intent) {
+        super.onRebind(intent);
+        Log.i(getResources().getString(R.string.app_name), "In onReBind");
+    }
+
+    @Override
+    public boolean onUnbind(Intent intent) {
+        Log.i(getResources().getString(R.string.app_name), "In unBind");
+        return super.onUnbind(intent);
+    }
 
     @Override
     public void onDestroy() {
